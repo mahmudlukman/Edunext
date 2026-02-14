@@ -1,0 +1,25 @@
+import mongoose, { Schema, Document } from "mongoose";
+
+export interface IAcademicYear extends Document {
+  name: string; // "2024-2025"
+  fromYear: Date; // "2024-09-01"
+  toYear: Date; // "2025-06-30"
+  isCurrent: boolean; // true/false
+}
+
+const AcademicYearSchema = new Schema(
+  {
+    name: { type: String, required: true },
+    fromYear: { type: Date, required: true },
+    toYear: { type: Date, required: true },
+    isCurrent: { type: Boolean, default: false },
+  },
+  { timestamps: true },
+);
+
+const AcademicYear = mongoose.model<IAcademicYear>(
+  "AcademicYear",
+  AcademicYearSchema,
+);
+
+export default AcademicYear;

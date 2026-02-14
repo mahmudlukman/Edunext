@@ -1,0 +1,46 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "A web platform that provides voters with verified profiles, past records, and summarized manifestos of candidates running for office in Nigeria.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "ts-node-dev --respawn --transpile-only server.ts",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "Mahmud Lukman",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@ai-sdk/google": "^3.0.23",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^25.2.2",
+    "ai": "^6.0.78",
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.9.0",
+    "compression": "^1.8.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.4",
+    "ejs": "^4.0.1",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0",
+    "inngest": "^3.52.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.1.6",
+    "resend": "^6.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/compression": "^1.8.1",
+    "@types/ejs": "^3.1.5",
+    "@types/ms": "^2.1.0"
+  }
+}
