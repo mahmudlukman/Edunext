@@ -1,4 +1,5 @@
 import express, { NextFunction, Request, Response } from "express";
+import config from "./config";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -6,7 +7,6 @@ import { errorMiddleware } from "./middleware/error";
 import compression from "compression";
 import helmet from "helmet";
 import type { CorsOptions } from "cors";
-import config from "./config";
 import limiter from "./utils/rateLimiter";
 import authRouter from "./routes/auth.route";
 import userRouter from "./routes/user.route";
@@ -17,10 +17,18 @@ import timetableRouter from "./routes/timetable.route";
 import activitiesLogRouter from "./routes/activitiesLog.route";
 import academicYearLogRouter from "./routes/academicYear.route";
 import dashboardLogRouter from "./routes/dashboard.route";
+import { serve } from "inngest/express";
+import { inngest } from "./inngest";
+import {
+  generateTimeTable,
+  generateExam,
+  handleExamSubmission,
+} from "./inngest/functions";
 
-export const app = express();
 // Load environment variables from .env file
 dotenv.config();
+
+export const app = express();
 // body parser
 app.use(express.json({ limit: "50mb" }));
 
@@ -73,6 +81,14 @@ app.use(
   activitiesLogRouter,
   academicYearLogRouter,
   dashboardLogRouter,
+);
+
+app.use(
+  "/api/v1/inngest",
+  serve({
+    client: inngest,
+    functions: [generateTimeTable, generateExam, handleExamSubmission],
+  })
 );
 
 // testing API
